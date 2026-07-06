@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 44" role="img">
+  <title>CMF Designs</title>
+  <rect x="0" y="0" width="40" height="40" rx="3" fill="none" stroke="#F5F5F7" stroke-width="1.5"/>
+  <rect x="7" y="7" width="26" height="7" fill="#F5F5F7"/>
+  <rect x="7" y="26" width="26" height="7" fill="#F5F5F7"/>
+  <rect x="7" y="7" width="7" height="26" fill="#F5F5F7"/>
+  <line x1="22" y1="16" x2="33" y2="36" stroke="#F5F5F7" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="33" cy="36" r="2.8" fill="#F5F5F7"/>
+  <text x="50" y="28" font-family="Syne, Arial Black, sans-serif" font-weight="800" font-size="26" letter-spacing="-1.5" fill="#F5F5F7">CMF</text>
+  <text x="51" y="40" font-family="Inter, Arial, sans-serif" font-weight="400" font-size="7.5" letter-spacing="2.5" fill="#6E6E73">DESIGNS</text>
+</svg>
