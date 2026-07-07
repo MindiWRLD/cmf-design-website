@@ -128,31 +128,52 @@
     try {
       var phases = document.querySelectorAll('.phase');
       var lineFill = document.getElementById('phaseLineFill');
-      if (phases.length && 'IntersectionObserver' in window) {
-        var phaseObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-              phaseObserver.unobserve(entry.target);
+
+      if (phases.length) {
+        // Methode 1: IntersectionObserver (schön gestaffelt)
+        if ('IntersectionObserver' in window) {
+          var phaseObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                phaseObserver.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '0px 0px -10% 0px', threshold: 0.01 });
+          phases.forEach(function (p) { phaseObserver.observe(p); });
+        }
+
+        // Methode 2: Scroll-Fallback (falls Observer nicht greift)
+        function checkPhases() {
+          var vh = window.innerHeight;
+          phases.forEach(function (p) {
+            var rect = p.getBoundingClientRect();
+            if (rect.top < vh * 0.9) {
+              p.classList.add('active');
             }
           });
-        }, { rootMargin: '0px 0px -15% 0px', threshold: 0.01 });
-        phases.forEach(function (p) { phaseObserver.observe(p); });
+        }
+        window.addEventListener('scroll', checkPhases, { passive: true });
+        checkPhases();
 
+        // Methode 3: Sicherheitsnetz - nach 3 Sek alle sichtbar
+        setTimeout(function () {
+          phases.forEach(function (p) { p.classList.add('active'); });
+        }, 3000);
+
+        // Verbindungslinie füllen
         var phasesWrap = document.querySelector('.phases');
         function updateLine() {
           if (!phasesWrap || !lineFill) return;
           var rect = phasesWrap.getBoundingClientRect();
-          var vh = window.innerHeight;
-          var start = vh * 0.75, end = vh * 0.25, total = rect.height;
+          var vh2 = window.innerHeight;
+          var start = vh2 * 0.75, end = vh2 * 0.25, total = rect.height;
           var progress = (start - rect.top) / (total + (start - end));
           progress = Math.max(0, Math.min(1, progress));
           lineFill.style.height = (progress * 100) + '%';
         }
         window.addEventListener('scroll', updateLine, { passive: true });
         updateLine();
-      } else if (phases.length) {
-        phases.forEach(function (p) { p.classList.add('active'); });
       }
     } catch (err) {
       document.querySelectorAll('.phase').forEach(function (p) { p.classList.add('active'); });
