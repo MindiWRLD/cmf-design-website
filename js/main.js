@@ -74,3 +74,43 @@
     s.style.display = 'block';
     gsap.fromTo(s, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out' });
   });
+
+  // ── Testimonial Marquee: Cards duplizieren für nahtlose Endlosschleife ──
+  document.querySelectorAll('.testi-track').forEach(track => {
+    track.innerHTML += track.innerHTML;
+  });
+
+  // ── Phasen-Animation: nacheinander aufdecken beim Scrollen ──
+  const phases = document.querySelectorAll('.phase');
+  const lineFill = document.getElementById('phaseLineFill');
+
+  if (phases.length) {
+    // Jede Phase einzeln aktivieren wenn sie in den Viewport kommt
+    const phaseObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // kleine Verzögerung je nach Phase für gestaffelten Effekt
+          const idx = parseInt(entry.target.dataset.phase) - 1;
+          setTimeout(() => entry.target.classList.add('active'), idx * 120);
+        }
+      });
+    }, { threshold: 0.35 });
+    phases.forEach(p => phaseObserver.observe(p));
+
+    // Verbindungslinie füllt sich basierend auf Scroll-Position
+    const phasesWrap = document.querySelector('.phases');
+    function updateLine() {
+      if (!phasesWrap || !lineFill) return;
+      const rect = phasesWrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Fortschritt: 0 wenn oben am Viewport-Mittelpunkt, 1 wenn unten durch
+      const start = vh * 0.75;
+      const end = vh * 0.25;
+      const total = rect.height;
+      let progress = (start - rect.top) / (total + (start - end));
+      progress = Math.max(0, Math.min(1, progress));
+      lineFill.style.height = (progress * 100) + '%';
+    }
+    window.addEventListener('scroll', updateLine, { passive: true });
+    updateLine();
+  }
