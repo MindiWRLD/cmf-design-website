@@ -41,7 +41,7 @@
   }
   .nav-logo {
     font-family: var(--fs); font-weight: 800; font-size: 1.2rem;
-    letter-spacing: -.03em; margin-right: auto; color: var(--white);
+    letter-spacing: -.01em; margin-right: auto; color: var(--white);
   }
   .nav-logo span { color: var(--muted); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -94,7 +94,7 @@
   h1 {
     font-family: var(--fs); font-weight: 800;
     font-size: clamp(3rem, 8.5vw, 8.5rem);
-    line-height: .98; letter-spacing: -.04em;
+    line-height: 1.02; letter-spacing: -.01em;
     margin-bottom: 1.5rem; color: var(--white);
   }
   h1 .dim { color: var(--muted); }
@@ -142,7 +142,7 @@
   h2 {
     font-family: var(--fs); font-weight: 800;
     font-size: clamp(2rem, 4.5vw, 3.2rem);
-    letter-spacing: -.03em; line-height: 1.1; color: var(--white);
+    letter-spacing: -.005em; line-height: 1.12; color: var(--white);
     margin-bottom: 1rem;
   }
   .sec-sub { color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 3rem; }
@@ -344,7 +344,7 @@
   .stat-num {
     display: block; font-family: var(--fs); font-weight: 800;
     font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--white); letter-spacing: -.03em; line-height: 1;
+    color: var(--white); letter-spacing: -.01em; line-height: 1;
   }
   .stat-label { font-size: .82rem; color: var(--muted); margin-top: .2rem; display: block; }
 
@@ -453,7 +453,7 @@
   .pkg-name { font-family: var(--fs); font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: .4rem; }
   .pkg-desc { font-size: .85rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; min-height: 44px; }
   .pkg-price { font-size: .9rem; color: var(--white); margin-bottom: 1.5rem; }
-  .pkg-price strong { font-family: var(--fs); font-size: 1.6rem; font-weight: 800; }
+  .pkg-price strong { font-family: var(--fs); font-size: 1.6rem; font-weight: 800; letter-spacing: .01em; }
   .pkg-price span { color: var(--muted); font-size: .8rem; }
   .pkg-features { list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.8rem; flex: 1; }
   .pkg-features li { font-size: .85rem; color: var(--muted); display: flex; gap: .6rem; align-items: flex-start; line-height: 1.5; }

@@ -132,11 +132,11 @@
         var phaseObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-              var idx = parseInt(entry.target.dataset.phase) - 1;
-              setTimeout(function () { entry.target.classList.add('active'); }, idx * 120);
+              entry.target.classList.add('active');
+              phaseObserver.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.35 });
+        }, { rootMargin: '0px 0px -15% 0px', threshold: 0.01 });
         phases.forEach(function (p) { phaseObserver.observe(p); });
 
         var phasesWrap = document.querySelector('.phases');
@@ -152,7 +152,6 @@
         window.addEventListener('scroll', updateLine, { passive: true });
         updateLine();
       } else if (phases.length) {
-        // Kein IntersectionObserver? Dann einfach alle Phasen zeigen.
         phases.forEach(function (p) { p.classList.add('active'); });
       }
     } catch (err) {
